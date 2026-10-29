@@ -1,13 +1,14 @@
 class Mont < Formula
-  desc "Native Mont project workspaces (Developer Preview)"
+  desc "Native Mont video workflows (Developer Preview)"
   homepage "https://github.com/usemont/mont-cli"
-  url "https://github.com/usemont/mont-cli/releases/download/v0.1.0-preview.1/mont-0.1.0-preview.1-darwin-arm64.tar.gz"
-  sha256 "36b61bffd4852758154338e104d51039f72bd676c7027180aed95d97fb6715c9"
-  version "0.1.0-preview.1"
+  url "https://github.com/usemont/mont-cli/releases/download/v0.1.0-preview.2/mont-0.1.0-preview.2-darwin-arm64.tar.gz"
+  sha256 "ca4a66c0368d05b073b43c61f72fcd029a18326d832afcdc8248abb119f425a9"
+  version "0.1.0-preview.2"
   license :cannot_represent
 
   depends_on macos: :sonoma
   depends_on arch: :arm64
+  depends_on "ffmpeg"
 
   def install
     bin.install "bin/mont"
@@ -15,8 +16,13 @@ class Mont < Formula
   end
 
   test do
-    assert_match "mont #{version}", shell_output("#{bin}/mont --version")
-    system bin/"mont", "init", testpath/"project", "--project-id", "homebrew-mont-preview"
-    system bin/"mont", "-C", testpath/"project", "validate"
+    assert_equal "mont #{version}", shell_output("#{bin}/mont --version").strip
+    ENV["PATH"] = "#{Formula["ffmpeg"].opt_bin}:/usr/bin:/bin:/usr/sbin:/sbin"
+    ENV["RENDER_WORKER_FFMPEG_PATH"] = (Formula["ffmpeg"].opt_bin/"ffmpeg").to_s
+    ENV["RENDER_WORKER_FFPROBE_PATH"] = (Formula["ffmpeg"].opt_bin/"ffprobe").to_s
+    system "/usr/bin/python3", pkgshare/"example/workflow.py", "--mont", bin/"mont"
+    system "/usr/bin/python3", pkgshare/"example/video_workflow.py",
+           "--mont", bin/"mont", "--ffmpeg", Formula["ffmpeg"].opt_bin/"ffmpeg",
+           "--ffprobe", Formula["ffmpeg"].opt_bin/"ffprobe", "--output", testpath/"video-proof"
   end
 end

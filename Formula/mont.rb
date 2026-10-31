@@ -1,9 +1,9 @@
 class Mont < Formula
   desc "Native Mont video workflows (Developer Preview)"
   homepage "https://github.com/usemont/mont-cli"
-  url "https://github.com/usemont/mont-cli/releases/download/v0.1.0-preview.7/mont-0.1.0-preview.7-darwin-arm64.tar.gz"
-  sha256 "7aef3fd9a680cbbefdbb43cbfa673cba78b31ebd4ea222c5c5a959c47ec55194"
-  version "0.1.0-preview.7"
+  url "https://github.com/usemont/mont-cli/releases/download/v0.1.0-preview.8/mont-0.1.0-preview.8-darwin-arm64.tar.gz"
+  sha256 "fb9eeb5b8186eff0404bf78baf0e422ae0541ff61179ed4e53d469753ead200a"
+  version "0.1.0-preview.8"
   license :cannot_represent
 
   depends_on macos: :sonoma
@@ -20,9 +20,9 @@ class Mont < Formula
     ENV["PATH"] = "#{Formula["ffmpeg"].opt_bin}:/usr/bin:/bin:/usr/sbin:/sbin"
     ENV["RENDER_WORKER_FFMPEG_PATH"] = (Formula["ffmpeg"].opt_bin/"ffmpeg").to_s
     ENV["RENDER_WORKER_FFPROBE_PATH"] = (Formula["ffmpeg"].opt_bin/"ffprobe").to_s
-    system bin/"mont", "-C", testpath/"project-proof", "workflow", "run",
+    system bin/"mont", "-C", testpath/"project-proof", "workflows", "run",
            pkgshare/"example/workflow.mont.json"
-    system bin/"mont", "-C", testpath/"video-proof", "workflow", "run",
+    system bin/"mont", "-C", testpath/"video-proof", "workflows", "run",
            pkgshare/"example/video-workflow.mont.json"
   end
 end

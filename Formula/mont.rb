@@ -1,9 +1,9 @@
 class Mont < Formula
   desc "Native Mont video workflows (Developer Preview)"
   homepage "https://github.com/usemont/mont-cli"
-  url "https://github.com/usemont/mont-cli/releases/download/v0.1.0-preview.6/mont-0.1.0-preview.6-darwin-arm64.tar.gz"
-  sha256 "991f158fc47452cf5644fc1aa659c93971d27bf17ce3629a08dee52efa48d2a5"
-  version "0.1.0-preview.6"
+  url "https://github.com/usemont/mont-cli/releases/download/v0.1.0-preview.7/mont-0.1.0-preview.7-darwin-arm64.tar.gz"
+  sha256 "7aef3fd9a680cbbefdbb43cbfa673cba78b31ebd4ea222c5c5a959c47ec55194"
+  version "0.1.0-preview.7"
   license :cannot_represent
 
   depends_on macos: :sonoma

@@ -1,9 +1,9 @@
 class Mont < Formula
   desc "Native Mont video workflows (Developer Preview)"
   homepage "https://github.com/usemont/mont-cli"
-  url "https://github.com/usemont/mont-cli/releases/download/v0.1.0-preview.9/mont-0.1.0-preview.9-darwin-arm64.tar.gz"
-  sha256 "9dc28a53c56fcef50c6fa36fe8965d036cb9b360f04147448efd3449ab4343ca"
-  version "0.1.0-preview.9"
+  url "https://github.com/usemont/mont-cli/releases/download/v0.1.0-preview.10/mont-0.1.0-preview.10-darwin-arm64.tar.gz"
+  sha256 "de3c5dccedcaaff6ff478fc15821bde867aad313dfae4d2f7c045a6efdd0c5c7"
+  version "0.1.0-preview.10"
   license :cannot_represent
 
   depends_on macos: :sonoma
@@ -13,6 +13,7 @@ class Mont < Formula
   def install
     bin.install "bin/mont"
     pkgshare.install "README.md", "TERMS.txt", "THIRD_PARTY_NOTICES.txt", "SBOM.json", "example"
+    pkgshare.install "editor" if File.directory?("editor")
   end
 
   test do
